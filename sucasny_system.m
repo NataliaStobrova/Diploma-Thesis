@@ -4,19 +4,19 @@ clc
 format long
 %Spustenie zaokruhlovacich funkcii zaokruh a zao 
 %Zadefinovanie vstupnych parametrov
-predpoved = 70; %= input('Zadajte poèet rokov predpovede: '); 
-vstup_na_trh_prace = 22; %= input('Zadajte vek vstupujúcich na trh práce: '); %minimalne od 16 rokov
-dochodkovy_vek_m0 = 63; %= input('Zadajte vek odchodu do dochodku pre muov: ');
-dochodkovy_vek_z0 = 63; %= input('Zadajte vek odchodu do dochodku pre eny: ');
-posun_doch_vek_m = 2; %= input('Zadajte posun veku odchodu do dochodku pre muov (v mesiacoch): ');
-posun_doch_vek_z = 2; %= input('Zadajte posun veku odchodu do dochodku pre eny (v mesiacoch): ');
-limit_2_pilier = 35; %= input('Zadajte vek, do kedy môe poistenec vstúpi do 2. piliera: ');
-miera_nezamestnanosti_m = 0.1053; %= input('Zadajte mieru zamestnanosti pre muov: '); %priemer 
-miera_nezamestnanosti_z = 0.1176; %= input('Zadajte mieru zamestnanosti pre eny: '); %priemer
-valorizacia = 0.026; %= input('Zadajte roènú mieru valorizácie dôchodkov: '); %za rok 2020  
-narast_mzdy = 0.0562;  %= input('Zadajte roènú mieru narastu mzdy: '); %priemer za roky 2017 - 2020 indexu nominalnej mzdy
-priemerna_mzda_mes = 1133; %= input('Zadajte priemernu mesaènú mzdu: '); %priemerna mzda za 06/2020
-priemerny_dochodok_mes = 484.94; %= input('Zadajte priemerny mesaènı dôchodok: '); %priemerny dochodok za 30.06.2020
+predpoved = 70; %= input('Zadajte poÄet rokov predpovede: '); 
+vstup_na_trh_prace = 22; %= input('Zadajte vek vstupujÃºcich na trh prÃ¡ce: '); %minimalne od 16 rokov
+dochodkovy_vek_m0 = 63; %= input('Zadajte vek odchodu do dochodku pre muÅ¾ov: ');
+dochodkovy_vek_z0 = 63; %= input('Zadajte vek odchodu do dochodku pre Å¾eny: ');
+posun_doch_vek_m = 0; %= input('Zadajte posun veku odchodu do dochodku pre muÅ¾ov (v mesiacoch): ');
+posun_doch_vek_z = 0; %= input('Zadajte posun veku odchodu do dochodku pre Å¾eny (v mesiacoch): ');
+limit_2_pilier = 35; %= input('Zadajte vek, do kedy mÃ´Å¾e poistenec vstÃºpiÅ¥ do 2. piliera: ');
+miera_nezamestnanosti_m = 0.1053; %= input('Zadajte mieru zamestnanosti pre muÅ¾ov: '); %priemer 
+miera_nezamestnanosti_z = 0.1176; %= input('Zadajte mieru zamestnanosti pre Å¾eny: '); %priemer
+valorizacia = 0.026; %= input('Zadajte roÄnÃº mieru valorizÃ¡cie dÃ´chodkov: '); %za rok 2020  
+narast_mzdy = 0.0562;  %= input('Zadajte roÄnÃº mieru narastu mzdy: '); %priemer za roky 2017 - 2020 indexu nominalnej mzdy
+priemerna_mzda_mes = 1133; %= input('Zadajte priemernu mesaÄnÃº mzdu: '); %priemerna mzda za 06/2020
+priemerny_dochodok_mes = 484.94; %= input('Zadajte priemerny mesaÄnÃ½ dÃ´chodok: '); %priemerny dochodok za 30.06.2020
 HDP(1) = 91105000000; %v roku 2020
 
 % % % % % % % MODELOVANIE SPORITELOV V 1. A 2. PILIERI % % % % % % % 
@@ -27,7 +27,7 @@ HDP(1) = 91105000000; %v roku 2020
 
 % % % % % % % MODELOVANIE vyplacania dochodkov v buducnosti % % % % % % %
 %Novopriznane dochodky sa rataju podla vzorca D=POMB*ADH*ODP, s POMB = 1 a ADH_0 = 14.2107
-%a ODP (sucet obdobia dochodkoveho poistenia ziskaného ku dnu vzniku naroku na dochodok)
+%a ODP (sucet obdobia dochodkoveho poistenia ziskanÃ©ho ku dnu vzniku naroku na dochodok)
 adh(1) = 14.2107; %v roku 2021
 vyplacanie_doch_SP_valor_m(1,2:predpoved) = 0;  %zadefinovanie pociatocnych nul 
 vyplacanie_doch_SP_valor_z(1,2:predpoved) = 0;
@@ -189,22 +189,22 @@ VYDAVKY_SOC_POISTOVNE_NA_DOCHODKY = vyplacanie_doch_m' + vyplacanie_doch_z'
 % scatter(pocet_rokov_2_pilier_m_predpoved(1:end,1), doSocPoist, 25, 'filled', 'g') % 'b' pre posun_doch_vek_m/z = 2
 % hold on
 % scatter(pocet_rokov_2_pilier_m_predpoved(1:end,1), vyplacanie_doch_m + vyplacanie_doch_z, 25, 'filled', 'r') % 'm' pre posun_doch_vek_m/z = 2
-% title({'Príjmy a vıdavky Sociálnej poisovne'})
-% xlabel('Rok prognózy')
-% ylabel('Príjmy / Vıdavky Sociálnej poisovne')
+% title({'PrÃ­jmy a vÃ½davky SociÃ¡lnej poisÅ¥ovne'})
+% xlabel('Rok prognÃ³zy')
+% ylabel('PrÃ­jmy / VÃ½davky SociÃ¡lnej poisÅ¥ovne')
 % ylim([0 200000000000])
-% legend({'príjmy ','vıdavky'},'Location','northwest')
-% legend({'príjmy (posun\_doch\_vek_{m/z} = 0)','vıdavky (posun\_doch\_vek_{m/z} = 0)','príjmy (posun\_doch\_vek_{m/z} = 2)','vıdavky (posun\_doch\_vek_{m/z} = 2)'},'Location','northwest')
+% legend({'prÃ­jmy ','vÃ½davky'},'Location','northwest')
+% legend({'prÃ­jmy (posun\_doch\_vek_{m/z} = 0)','vÃ½davky (posun\_doch\_vek_{m/z} = 0)','prÃ­jmy (posun\_doch\_vek_{m/z} = 2)','vÃ½davky (posun\_doch\_vek_{m/z} = 2)'},'Location','northwest')
  
 % figure
 % scatter(pocet_rokov_2_pilier_m_predpoved(1:end,1), pocet_pracujucich, 'filled', 'g') % 'b' pre posun_doch_vek_m/z = 2
 % hold on
 % scatter(pocet_rokov_2_pilier_m_predpoved(1:end,1), celkovy_pocet_penzistov_m + celkovy_pocet_penzistov_z, 'filled', 'r') % 'm' pre posun_doch_vek_m/z = 2
-% title({'Poèet prispievate¾ov vs. poèet poberate¾ov'})
-% xlabel('Rok prognózy')
-% ylabel('Poèet prispievate¾ov / poèet poberate¾ov')
+% title({'PoÄet prispievateÄ¾ov vs. poÄet poberateÄ¾ov'})
+% xlabel('Rok prognÃ³zy')
+% ylabel('PoÄet prispievateÄ¾ov / poÄet poberateÄ¾ov')
 % ylim([500000 2000000])
-% legend({'poèet prispievate¾ov (posun\_doch\_vek_{m/z} = 0)' ,'poèet poberate¾ov (posun\_doch\_vek_{m/z} = 0)', 'poèet prispievate¾ov (posun\_doch\_vek_{m/z} = 2)' ,'poèet poberate¾ov (posun\_doch\_vek_{m/z} = 2)'},'Location','northeast')
+% legend({'poÄet prispievateÄ¾ov (posun\_doch\_vek_{m/z} = 0)' ,'poÄet poberateÄ¾ov (posun\_doch\_vek_{m/z} = 0)', 'poÄet prispievateÄ¾ov (posun\_doch\_vek_{m/z} = 2)' ,'poÄet poberateÄ¾ov (posun\_doch\_vek_{m/z} = 2)'},'Location','northeast')
 
 for i=1:predpoved
  HDP(i+1) = HDP(i) * (1 + narast_mzdy);
@@ -213,8 +213,8 @@ end
 
 % figure
 % scatter(pocet_rokov_2_pilier_m_predpoved(1:end,1), deficit, 25, 'filled', 'r')  % 'm' pre posun_doch_vek_m/z = 2
-% title({'Deficit starobného fondu Sociálnej poisovne [% HDP]'})
-% xlabel('Rok prognózy')
-% ylabel('Deficit starobného fondu ')
+% title({'Deficit starobnÃ©ho fondu SociÃ¡lnej poisÅ¥ovne [% HDP]'})
+% xlabel('Rok prognÃ³zy')
+% ylabel('Deficit starobnÃ©ho fondu ')
 % ylim([0 5])
 % legend({'deficit (posun\_doch\_vek_{m/z} = 0)', 'deficit (posun\_doch\_vek_{m/z} = 2)'},'Location','southwest')
